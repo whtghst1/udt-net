@@ -1,4 +1,4 @@
-**Notice** It appears the underlying native udt library is no longer being maintained. There have been no new releases since Feb 2013. This library is simply a wrapper around the native library. This library has very little functionality on it's own. While I can make minor fixes to this wrapper library, I can not fix any issues discovered in the underlying native udt library, where most of the functionality resides.
+*Notice** This is a fork of the original UDT-NET library. Niether of them have been maintained in quite some time. The native udt library has not been maintained since 2013 and this libary has not been updated since 2015. This library is simply a .NET wrapper around the native library. I have structred the code to include the native library source to faciliate a cleaner way to build. I have also updated both the native libary and the this libary to use Visual Studio 2017. I also updated the Windows SDK target to be Windows 10.
 
 # Overview
 
