@@ -131,6 +131,7 @@ CUDT::CUDT()
    m_bBroken = false;
    m_bPeerHealth = true;
    m_ullLingerExpiration = 0;
+   m_llLastReqTime = 0;
 }
 
 CUDT::CUDT(const CUDT& ancestor)
@@ -184,6 +185,7 @@ CUDT::CUDT(const CUDT& ancestor)
    m_bBroken = false;
    m_bPeerHealth = true;
    m_ullLingerExpiration = 0;
+   m_llLastReqTime = 0;
 }
 
 CUDT::~CUDT()
@@ -667,6 +669,9 @@ void CUDT::connect(const sockaddr* serv_addr)
 
       if (CTimer::getTime() > ttl)
       {
+		 // Stop waiting for this connection
+		 m_pRcvQueue->removeConnector(m_SocketID);
+
          // timeout
          e = CUDTException(1, 1, 0);
          break;
