@@ -43,6 +43,7 @@
 #include <fstream>
 #include <iostream>
 #include <vcclr.h>
+#include <memory>
 
 using namespace Udt;
 using namespace System;
@@ -352,7 +353,7 @@ UDT::UDSET* Udt::Socket::CreateUDSet(String^ paramName, System::Collections::Gen
 	if (fds == nullptr || fds->Count == 0)
 		return NULL;
 
-	std::auto_ptr<UDT::UDSET> set(new UDT::UDSET);
+	std::unique_ptr<UDT::UDSET> set(new UDT::UDSET);
 	UD_ZERO(set);
 
 	for each (Udt::Socket^ socket in fds)
@@ -490,9 +491,9 @@ void Udt::Socket::Select(
 		tv.tv_usec = (timeoutTicks % TimeSpan::TicksPerSecond) / 10;
 	}
 
-	std::auto_ptr<UDT::UDSET> readFds(CreateUDSet("checkRead", checkRead));
-	std::auto_ptr<UDT::UDSET> writeFds(CreateUDSet("checkWrite", checkWrite));
-	std::auto_ptr<UDT::UDSET> exceptFds(CreateUDSet("checkError", checkError));
+	std::unique_ptr<UDT::UDSET> readFds(CreateUDSet("checkRead", checkRead));
+	std::unique_ptr<UDT::UDSET> writeFds(CreateUDSet("checkWrite", checkWrite));
+	std::unique_ptr<UDT::UDSET> exceptFds(CreateUDSet("checkError", checkError));
 
 	if (UDT::ERROR == UDT::select(0, readFds.get(), writeFds.get(), exceptFds.get(), &tv))
 	{
