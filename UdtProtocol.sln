@@ -14,6 +14,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ReceiveFile", "ReceiveFile\
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UdtProtocol-Test", "UdtProtocol-Test\UdtProtocol-Test.csproj", "{CF9918BA-989A-463B-BC64-02593041C9DD}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "udt4", "udt4", "{672AE2BE-8E82-4D57-A9FF-228C19FB60CB}"
+EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "udt", "udt4\win\udt.vcxproj", "{D84D100A-7C21-4CCB-B16E-0FB37137C16C}"
 EndProject
 Global
@@ -89,6 +91,9 @@ Global
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{D84D100A-7C21-4CCB-B16E-0FB37137C16C} = {672AE2BE-8E82-4D57-A9FF-228C19FB60CB}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {6E0926A7-FD3B-4E90-930E-C594ABEDE2C4}

@@ -1,3 +1,4 @@
+
 /*****************************************************************************
 Copyright (c) 2001 - 2011, The Board of Trustees of the University of Illinois.
 All rights reserved.
@@ -701,8 +702,11 @@ int CUDT::connect(const CPacket& response) throw ()
    // returning -1 means there is an error.
    // returning 1 or 2 means the connection is in process and needs more handshake
 
-   if (!m_bConnecting)
-      return -1;
+	if (!m_bConnecting)
+	{
+		m_pRcvQueue->removeConnector(m_SocketID);
+		return -1;
+	}
 
    if (m_bRendezvous && ((0 == response.getFlag()) || (1 == response.getType())) && (0 != m_ConnRes.m_iType))
    {
@@ -712,7 +716,10 @@ int CUDT::connect(const CPacket& response) throw ()
    }
 
    if ((1 != response.getFlag()) || (0 != response.getType()))
-      return -1;
+   {
+	   m_pRcvQueue->removeConnector(m_SocketID);
+	   return -1;
+   }
 
    m_ConnRes.deserialize(response.m_pcData, response.getLength());
 
@@ -720,8 +727,11 @@ int CUDT::connect(const CPacket& response) throw ()
    {
       // regular connect should NOT communicate with rendezvous connect
       // rendezvous connect require 3-way handshake
-      if (1 == m_ConnRes.m_iReqType)
-         return -1;
+	   if (1 == m_ConnRes.m_iReqType)
+	   {
+		   m_pRcvQueue->removeConnector(m_SocketID);
+		   return -1;
+	   }
 
       if ((0 == m_ConnReq.m_iReqType) || (0 == m_ConnRes.m_iReqType))
       {
